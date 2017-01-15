@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * 2007-2016 PrestaShop
  *
@@ -27,6 +28,32 @@
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
+=======
+/*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
 /**
  * @property Configuration $object
@@ -763,6 +790,7 @@ class AdminPerformanceControllerCore extends AdminController
                 $this->errors[] = $this->trans('You do not have permission to edit this.', array(), 'Admin.Notifications.Error');
             }
         }
+<<<<<<< HEAD
 
         $filesystem = new Filesystem();
         $phpParametersFilepath = _PS_ROOT_DIR_.'/app/config/parameters.php';
@@ -771,6 +799,51 @@ class AdminPerformanceControllerCore extends AdminController
                 $filesystem->dumpFile($destination, '<?php return '.var_export($config, true).';'."\n");
             } catch (IOException $e) {
                 return false;
+=======
+        if ((bool)Tools::getValue('ciphering_up') && Configuration::get('PS_CIPHER_ALGORITHM') != (int)Tools::getValue('PS_CIPHER_ALGORITHM')) {
+            if ($this->tabAccess['edit'] === '1') {
+                $algo = (int)Tools::getValue('PS_CIPHER_ALGORITHM');
+                $prev_settings = file_get_contents(_PS_ROOT_DIR_.'/config/settings.inc.php');
+                $new_settings = $prev_settings;
+                if ($algo) {
+                    if (!function_exists('mcrypt_encrypt')) {
+                        $this->errors[] = Tools::displayError('The "Mcrypt" PHP extension is not activated on this server.');
+                    } else {
+                        if (!strstr($new_settings, '_RIJNDAEL_KEY_')) {
+                            $key_size = mcrypt_get_key_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+                            $key = Tools::passwdGen($key_size);
+                            $new_settings = preg_replace(
+                                '/define\(\'_COOKIE_KEY_\', \'([a-z0-9=\/+-_]+)\'\);/i',
+                                'define(\'_COOKIE_KEY_\', \'\1\');'."\n".'define(\'_RIJNDAEL_KEY_\', \''.$key.'\');',
+                                $new_settings
+                            );
+                        }
+                        if (!strstr($new_settings, '_RIJNDAEL_IV_')) {
+                            $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+                            $iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
+                            $new_settings = preg_replace(
+                                '/define\(\'_COOKIE_IV_\', \'([a-z0-9=\/+-_]+)\'\);/i',
+                                'define(\'_COOKIE_IV_\', \'\1\');'."\n".'define(\'_RIJNDAEL_IV_\', \''.$iv.'\');',
+                                $new_settings
+                            );
+                        }
+                    }
+                }
+                if (!count($this->errors)) {
+                    // If there is not settings file modification or if the backup and replacement of the settings file worked
+                    if ($new_settings == $prev_settings || (
+                        copy(_PS_ROOT_DIR_.'/config/settings.inc.php', _PS_ROOT_DIR_.'/config/settings.old.php')
+                        && (bool)file_put_contents(_PS_ROOT_DIR_.'/config/settings.inc.php', $new_settings)
+                    )) {
+                        Configuration::updateValue('PS_CIPHER_ALGORITHM', $algo);
+                        $redirectAdmin = true;
+                    } else {
+                        $this->errors[] = Tools::displayError('The settings file cannot be overwritten.');
+                    }
+                }
+            } else {
+                $this->errors[] = Tools::displayError('You do not have permission to edit this.');
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
             }
             return true;
         };

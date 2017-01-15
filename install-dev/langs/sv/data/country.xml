@@ -82,13 +82,21 @@
     <name>Nya Zeland</name>
   </country>
   <country id="KR">
+<<<<<<< HEAD
     <name>Syd Korea</name>
+=======
+    <name>Sydkorea</name>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   </country>
   <country id="IL">
     <name>Israel</name>
   </country>
   <country id="ZA">
+<<<<<<< HEAD
     <name>Syd Afrika</name>
+=======
+    <name>Sydafrika</name>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   </country>
   <country id="NG">
     <name>Nigeria</name>
@@ -214,7 +222,11 @@
     <name>Kongo, Dem. Republik</name>
   </country>
   <country id="CG">
+<<<<<<< HEAD
     <name>Kongo, Republic</name>
+=======
+    <name>Kongo, Republik</name>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   </country>
   <country id="CR">
     <name>Costa Rica</name>
@@ -373,7 +385,7 @@
     <name>Laos</name>
   </country>
   <country id="LV">
-    <name>Latvia</name>
+    <name>Lettland</name>
   </country>
   <country id="LB">
     <name>Libanon</name>
@@ -484,7 +496,11 @@
     <name>Niue</name>
   </country>
   <country id="NF">
+<<<<<<< HEAD
     <name>Norfolk Öarna</name>
+=======
+    <name>Norfolkön</name>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   </country>
   <country id="MP">
     <name>Nordmarianerna Öarna</name>
@@ -526,7 +542,7 @@
     <name>Qatar</name>
   </country>
   <country id="RE">
-    <name>Reunion Island</name>
+    <name>Reunion öarna</name>
   </country>
   <country id="RU">
     <name>Ryska Federationen</name>
@@ -670,7 +686,11 @@
     <name>Jungfruöarna (Storbritannien)</name>
   </country>
   <country id="VI">
+<<<<<<< HEAD
     <name>Jungfruöarna (US)</name>
+=======
+    <name>Jungfruöarna (USA)</name>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   </country>
   <country id="WF">
     <name>Wallis och Futuna</name>
@@ -715,10 +735,10 @@
     <name>Julön</name>
   </country>
   <country id="CC">
-    <name>Cocos (Keeling) Islands</name>
+    <name>Cocos (Keeling) öarna</name>
   </country>
   <country id="CK">
-    <name>Cook Islands</name>
+    <name>Cook öarna</name>
   </country>
   <country id="GF">
     <name>Franska Guyana</name>

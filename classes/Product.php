@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * 2007-2016 PrestaShop
  *
@@ -23,6 +24,32 @@
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
+=======
+/*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
 /**
  * @deprecated 1.5.0.1
@@ -3007,6 +3034,10 @@ class ProductCore extends ObjectModel
         );
 
         if (isset(self::$_prices[$cache_id])) {
+            /* Affect reference before returning cache */
+            if (isset($specific_price['price']) && $specific_price['price'] > 0) {
+                $specific_price['price'] = self::$_prices[$cache_id];
+            }
             return self::$_prices[$cache_id];
         }
 
@@ -3057,7 +3088,10 @@ class ProductCore extends ObjectModel
         // convert only if the specific price is in the default currency (id_currency = 0)
         if (!$specific_price || !($specific_price['price'] >= 0 && $specific_price['id_currency'])) {
             $price = Tools::convertPrice($price, $id_currency);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
             if (isset($specific_price['price']) && $specific_price['price'] >= 0) {
                 $specific_price['price'] = $price;
             }
@@ -3129,11 +3163,11 @@ class ProductCore extends ObjectModel
 
                 $specific_price_reduction = $reduction_amount;
 
-                    // Adjust taxes if required
+                // Adjust taxes if required
 
-                    if (!$use_tax && $specific_price['reduction_tax']) {
-                        $specific_price_reduction = $product_tax_calculator->removeTaxes($specific_price_reduction);
-                    }
+                if (!$use_tax && $specific_price['reduction_tax']) {
+                    $specific_price_reduction = $product_tax_calculator->removeTaxes($specific_price_reduction);
+                }
                 if ($use_tax && !$specific_price['reduction_tax']) {
                     $specific_price_reduction = $product_tax_calculator->addTaxes($specific_price_reduction);
                 }
@@ -3222,8 +3256,9 @@ class ProductCore extends ObjectModel
     public function getPublicPrice($tax = true, $id_product_attribute = null, $decimals = 6,
             $divisor = null, $only_reduc = false, $usereduc = true, $quantity = 1)
     {
+        $specific_price_output = null;
         return Product::getPriceStatic((int)$this->id, $tax, $id_product_attribute, $decimals, $divisor, $only_reduc, $usereduc, $quantity,
-            false, null, null, null, null, true, true, null, false);
+            false, null, null, null, $specific_price_output, true, true, null, false);
     }
 
     public function getIdProductAttributeMostExpensive()

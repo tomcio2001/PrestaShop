@@ -18,10 +18,17 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
+<<<<<<< HEAD
  * @author    PrestaShop SA <contact@prestashop.com>
  * @copyright 2007-2016 PrestaShop SA
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
+=======
+ *  @author    PrestaShop SA <contact@prestashop.com>
+ *  @copyright 2007-2016 PrestaShop SA
+ *  @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *  International Registered Trademark & Property of PrestaShop SA
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
  */
 
 use PrestaShop\PrestaShop\Adapter\ServiceLocator;
@@ -1144,12 +1151,26 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
             // Checking for fields validity
             // Hack for postcode required for country which does not have postcodes
             if (!empty($value) || $value === '0' || ($field == 'postcode' && $value == '0')) {
+<<<<<<< HEAD
                 if (isset($data['validate'])) {
                     if (!call_user_func('Validate::'.$data['validate'],$value) && (!empty($value) || $data['required'])) {
                         $errors[$field] = '<b>'.self::displayFieldName($field, get_class($this), $htmlentities).
                             '</b> '.Tools::displayError('is invalid.');
                     }
                 } else {
+=======
+                $validation_error = false;
+                if (isset($data['validate'])) {
+                    $data_validate = $data['validate'];
+                    if (!Validate::$data_validate($value) && (!empty($value) || $data['required'])) {
+                        $errors[$field] = '<b>'.self::displayFieldName($field, get_class($this), $htmlentities).
+                            '</b> '.Tools::displayError('is invalid.');
+                        $validation_error = true;
+                    }
+                }
+
+                if (!$validation_error) {
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                     if (isset($data['copy_post']) && !$data['copy_post']) {
                         continue;
                     }

@@ -18,10 +18,17 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
+<<<<<<< HEAD
  * @author    PrestaShop SA <contact@prestashop.com>
  * @copyright 2007-2016 PrestaShop SA
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
+=======
+ *  @author 	PrestaShop SA <contact@prestashop.com>
+ *  @copyright  2007-2016 PrestaShop SA
+ *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *  International Registered Trademark & Property of PrestaShop SA
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
  */
 
 use PrestaShop\PrestaShop\Core\Cldr;
@@ -1263,6 +1270,15 @@ class AdminControllerCore extends Controller
     {
         if (Validate::isLoadedObject($object = $this->loadObject())) {
             if ($object->toggleStatus()) {
+                PrestaShopLogger::addLog(
+                    sprintf($this->l('%s status switched to %s', 'AdminTab', false, false), $this->className, $object->active ? 'enable' : 'disable'),
+                    1,
+                    null,
+                    $this->className,
+                    (int)$object->id,
+                    true,
+                    (int)$this->context->employee->id
+                );
                 $matches = array();
                 if (preg_match('/[\?|&]controller=([^&]*)/', (string)$_SERVER['HTTP_REFERER'], $matches) !== false
                     && strtolower($matches[1]) != strtolower(preg_replace('/controller/i', '', get_class($this)))) {
@@ -2272,6 +2288,9 @@ class AdminControllerCore extends Controller
             'addons_forgot_password_link' => '//addons.prestashop.com/'.$this->context->language->iso_code.'/forgot-your-password'
         ));
 
+        //Force override translation key
+        Context::getContext()->override_controller_name_for_translations = 'AdminModules';
+
         $this->modals[] = array(
             'modal_id' => 'modal_addons_connect',
             'modal_class' => 'modal-md',
@@ -2281,6 +2300,9 @@ class AdminControllerCore extends Controller
             .'&utm_content='.(defined('_PS_HOST_MODE_') ? 'cloud' : 'download').'">PrestaShop Addons</a>',
             'modal_content' => $this->context->smarty->fetch('controllers/modules/login_addons.tpl'),
         );
+
+        //After override translation, remove it
+        Context::getContext()->override_controller_name_for_translations = null;
     }
 
     /**
@@ -2626,11 +2648,17 @@ class AdminControllerCore extends Controller
 
     public function setMedia($isNewTheme = false)
     {
+<<<<<<< HEAD
         if ($isNewTheme) {
             $this->addCSS(__PS_BASE_URI__.$this->admin_webpath.'/themes/new-theme/public/theme.css', 'all', 1);
             $this->addJS(__PS_BASE_URI__.$this->admin_webpath.'/themes/new-theme/public/bundle.js');
             $this->addjQueryPlugin(array('chosen'));
         } else {
+=======
+        //Bootstrap
+        $this->addCSS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/css/'.$this->bo_css, 'all', 0);
+        $this->addCSS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/css/overrides.css', 'all', PHP_INT_MAX);
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
             //Bootstrap
             $this->addCSS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/css/'.$this->bo_css, 'all', 0);
@@ -2642,11 +2670,19 @@ class AdminControllerCore extends Controller
             $this->addjQueryPlugin('growl', null, false);
             $this->addJqueryUI(array('ui.slider', 'ui.datepicker'));
 
+<<<<<<< HEAD
             $this->addJS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/js/vendor/bootstrap.min.js');
             $this->addJS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/js/vendor/modernizr.min.js');
             $this->addJS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/js/modernizr-loads.js');
             $this->addJS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/js/vendor/moment-with-langs.min.js');
             $this->addJS(__PS_BASE_URI__.$this->admin_webpath.'/themes/'.$this->bo_theme.'/public/bundle.js');
+=======
+        $this->addJS(array(
+            _PS_JS_DIR_.'admin.js?v='._PS_VERSION_,
+            _PS_JS_DIR_.'tools.js?v='._PS_VERSION_,
+            _PS_JS_DIR_.'jquery/plugins/timepicker/jquery-ui-timepicker-addon.js'
+        ));
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
             $this->addJS(_PS_JS_DIR_.'jquery/plugins/timepicker/jquery-ui-timepicker-addon.js');
 
@@ -4075,6 +4111,7 @@ class AdminControllerCore extends Controller
             foreach ($this->boxes as $id) {
                 /** @var ObjectModel $object */
                 $object = new $this->className((int)$id);
+                $object->setFieldsToUpdate(array('active' => true));
                 $object->active = (int)$status;
                 $result &= $object->update();
             }

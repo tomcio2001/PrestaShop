@@ -18,10 +18,17 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
+<<<<<<< HEAD
  * @author    PrestaShop SA <contact@prestashop.com>
  * @copyright 2007-2016 PrestaShop SA
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
+=======
+ *  @author 	PrestaShop SA <contact@prestashop.com>
+ *  @copyright  2007-2016 PrestaShop SA
+ *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *  International Registered Trademark & Property of PrestaShop SA
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
  */
 
 /**
@@ -442,6 +449,7 @@ class MediaCore
     /**
      * Combine Compress and Cache CSS (ccc) calls
      *
+<<<<<<< HEAD
      * @param array $cssFiles
      *
      * @return array processed css_files
@@ -456,6 +464,25 @@ class MediaCore
         $compressedCssFilesInfos = array();
         $protocolLink = Tools::getCurrentUrlProtocolPrefix();
         $cachePath = _PS_THEME_DIR_.'cache/';
+=======
+     * @param array $css_files
+     * @param array $cache_path
+     *
+     * @return array processed css_files
+     */
+    public static function cccCss($css_files, $cache_path = null)
+    {
+        //inits
+        $css_files_by_media = array();
+        $external_css_files = array();
+        $compressed_css_files = array();
+        $compressed_css_files_not_found = array();
+        $compressed_css_files_infos = array();
+        $protocol_link = Tools::getCurrentUrlProtocolPrefix();
+        //if cache_path not specified, set curent theme cache folder
+        $cache_path = $cache_path ? $cache_path : _PS_THEME_DIR_.'cache/';
+        $css_split_need_refresh = false;
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
         // group css files by media
         foreach ($cssFiles as $filename => $media) {
@@ -515,6 +542,7 @@ class MediaCore
         }
 
         // aggregate and compress css files content, write new caches files
+<<<<<<< HEAD
         $importUrl = array();
         foreach ($cssFilesByMedia as $media => $mediaInfos) {
             $cacheFilename = $cachePath.'v_'.$version.'_'.$compressedCssFilesInfos[$media]['key'].'_'.$media.'.css';
@@ -522,6 +550,16 @@ class MediaCore
                 $cacheFilename = $cachePath.'v_'.$version.'_'.$compressedCssFilesInfos[$media]['key'].'_'.$media.'.css';
                 $compressedCssFiles[$media] = '';
                 foreach ($mediaInfos['files'] as $file_infos) {
+=======
+        $import_url = array();
+        foreach ($css_files_by_media as $media => $media_infos) {
+            $cache_filename = $cache_path.'v_'.$version.'_'.$compressed_css_files_infos[$media]['key'].'_'.$media.'.css';
+            if ($media_infos['date'] > $compressed_css_files_infos[$media]['date']) {
+                $css_split_need_refresh = true;
+                $cache_filename = $cache_path.'v_'.$version.'_'.$compressed_css_files_infos[$media]['key'].'_'.$media.'.css';
+                $compressed_css_files[$media] = '';
+                foreach ($media_infos['files'] as $file_infos) {
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                     if (file_exists($file_infos['path'])) {
                         $compressedCssFiles[$media] .= Media::minifyCSS(file_get_contents($file_infos['path']), $file_infos['uri'], $importUrl);
                     } else {
@@ -551,7 +589,72 @@ class MediaCore
             $cssFiles[$protocolLink.Tools::getMediaServer($url).$url] = $media;
         }
 
+<<<<<<< HEAD
         return array_merge($externalCssFiles, $cssFiles);
+=======
+        $compiled_css = array_merge($external_css_files, $css_files);
+
+        //If browser not IE <= 9, bypass ieCssSplitter
+        if (!preg_match('/(?i)msie [1-9]/', $_SERVER['HTTP_USER_AGENT'])) {
+            return $compiled_css;
+        }
+        $splitted_css = self::ieCssSplitter($compiled_css, $cache_path.'ie9', $css_split_need_refresh);
+
+        return array_merge($splitted_css, $compiled_css);
+    }
+
+    /**
+     * Splits stylesheets that go beyond the IE limit of 4096 selectors
+     *
+     * @param array $compiled_css
+     * @param string $cache_path
+     * @param bool $refresh
+     *
+     * @return array processed css_files
+     */
+    public static function ieCssSplitter($compiled_css, $cache_path, $refresh = false)
+    {
+        $splitted_css = array();
+        $protocol_link = Tools::getCurrentUrlProtocolPrefix();
+        //return cached css
+        if (!$refresh) {
+            $cached_files = scandir($cache_path);
+            foreach ($cached_files as $file) {
+                if ($file != '.' && $file != '..') {
+                    $css_url = str_replace(_PS_ROOT_DIR_, '', $protocol_link.Tools::getMediaServer('').$cache_path.DIRECTORY_SEPARATOR.$file);
+                    $splitted_css[$css_url] = 'all';
+                }
+            }
+            return array('lteIE9' => $splitted_css);
+        }
+        if (!is_dir($cache_path)) {
+            mkdir($cache_path, 0777, true);
+        }
+        require_once(_PS_ROOT_DIR_.'/tools/CssSplitter.php');
+        $splitter = new CssSplitter();
+        $css_rule_limit = 4095;
+        foreach ($compiled_css as $css => $media) {
+            $file_info = parse_url($css);
+            $file_basename = basename($file_info['path']);
+            $css_content = file_get_contents(_PS_ROOT_DIR_.$file_info['path']);
+            $count = $splitter->countSelectors($css_content) - $css_rule_limit;
+            if (($count / $css_rule_limit) > 0) {
+                $part = 2;
+                for ($i = $count; $i > 0; $i -= $css_rule_limit) {
+                    $new_css_name = 'ie_split_'.$part.'_'.$file_basename;
+                    $css_url = str_replace(_PS_ROOT_DIR_, '', $protocol_link.Tools::getMediaServer('').$cache_path.DIRECTORY_SEPARATOR.$new_css_name);
+                    $splitted_css[$css_url] = $media;
+                    file_put_contents($cache_path.DIRECTORY_SEPARATOR.$new_css_name, $splitter->split($css_content, $part));
+                    chmod($cache_path.DIRECTORY_SEPARATOR.$new_css_name, 0777);
+                    $part++;
+                }
+            }
+        }
+        if (count($splitted_css) > 0) {
+            return array('lteIE9' => $splitted_css);
+        }
+        return array('lteIE9' => array());
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
     }
 
     /**

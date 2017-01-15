@@ -272,7 +272,10 @@ CREATE TABLE `PREFIX_cart_product` (
   `id_address_delivery` int(10) unsigned NOT NULL DEFAULT '0',
   `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
   `id_product_attribute` int(10) unsigned NOT NULL DEFAULT '0',
+<<<<<<< HEAD
   `id_customization` int(10) unsigned NOT NULL DEFAULT '0',
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   `quantity` int(10) unsigned NOT NULL DEFAULT '0',
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_cart`,`id_product`,`id_product_attribute`,`id_customization`,`id_address_delivery`),

@@ -17,7 +17,10 @@ GitHub contributors:
 - Alexander Otchenashev
 - Alexandra Even
 - Alexandre Segura
+<<<<<<< HEAD
 - alexdee2007
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - AlexEven
 - Alexey Svistunov
 - alexey-svistunov
@@ -96,7 +99,11 @@ GitHub contributors:
 - Daniele Giachino
 - danoosh
 - Danoosh Mir
+<<<<<<< HEAD
 - Dany Maillard
+=======
+- daresh
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - David Eschmeyer
 - David Gasperoni
 - David Sivocha
@@ -169,8 +176,11 @@ GitHub contributors:
 - Galaydyuk Alexandr
 - Gamesh
 - Geoffray
+<<<<<<< HEAD
 - Gerdus van Zyl
 - gfanton
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - ggedamed
 - Giant Leap Lab
 - Ginkosama
@@ -198,7 +208,10 @@ GitHub contributors:
 - harelguy
 - hiousi
 - htrex
+<<<<<<< HEAD
 - hubiktomas
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - Ian Fung
 - idnovate
 - indesign47
@@ -261,7 +274,11 @@ GitHub contributors:
 - Lesley Paone
 - LOIC ROSSET ltd
 - lozal2244
+<<<<<<< HEAD
 - Luc
+=======
+- luc
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - Luc Vandesype
 - Luca T.
 - Lucas CERDAN
@@ -271,7 +288,10 @@ GitHub contributors:
 - Lea Mendes Da Silva
 - Leo
 - M-Mommsen
+<<<<<<< HEAD
 - M03G
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - MacRoy
 - Madef
 - Madman
@@ -283,8 +303,11 @@ GitHub contributors:
 - Marco Cervellin
 - Marcos
 - Marius
+<<<<<<< HEAD
 - Martin Fojtik
 - martinfojtik
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - matiasiglesias
 - Mats Rynge
 - Matteo
@@ -299,7 +322,11 @@ GitHub contributors:
 - mchelh
 - mchojnacki
 - mdomenjoud
+<<<<<<< HEAD
 - melvin
+=======
+- Mehdi BOUZIDI
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 - Michael Dekker
 - Michael Hjulskov
 - Michael SALIHI
@@ -333,6 +360,7 @@ GitHub contributors:
 - Nino Uzelac
 - nodexpl
 - nturato
+- okom3pom
 - oleacorner
 - Olivier Bonvalet
 - Otto Nascarella

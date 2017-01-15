@@ -6,10 +6,15 @@
   <tab id="DEFAULT" name="Di Più"/>
   <tab id="Addresses" name="Indirizzi"/>
   <tab id="Administration" name="Amministrazione"/>
+<<<<<<< HEAD
   <tab id="Module_Page" name="Moduli e Servizi"/>
   <tab id="Advanced_Parameters" name="Parametri avanzati"/>
   <tab id="Attachments" name="Allegati"/>
   <tab id="Attributes_and_features" name="Attributi &amp; Features"/>
+=======
+  <tab id="Advanced_Parameters" name="Parametri avanzati"/>
+  <tab id="Attachments" name="Allegati"/>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="Attributes_and_Values" name="Attributi"/>
   <tab id="Carriers" name="Corrieri"/>
   <tab id="Cart_Rules" name="Regole carrello"/>
@@ -26,6 +31,7 @@
   <tab id="Credit_Slips" name="Note di credito"/>
   <tab id="CSV_Import" name="Importazione CSV"/>
   <tab id="Currencies" name="Valute"/>
+<<<<<<< HEAD
   <tab id="Customer_Service_2" name="Assistenza clienti"/>
   <tab id="Customer_Service" name="Assistenza clienti"/>
   <tab id="Customer_settings" name="Customer Settings" />
@@ -33,38 +39,63 @@
   <tab id="Customers_2" name="Clienti"/>
   <tab id="Customers_1" name="Clienti"/>
   <tab id="Database" name="Database" />
+=======
+  <tab id="Customer_Service" name="Assistenza clienti"/>
+  <tab id="Customers" name="Clienti"/>
+  <tab id="Customers_2" name="Clienti"/>
+  <tab id="Customers_1" name="Clienti"/>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="DB_Backup" name="Backup database"/>
   <tab id="Delivery_Slips" name="Note di consegna"/>
   <tab id="E-mail" name="E-mail"/>
   <tab id="Employees_1" name="Team"/>
   <tab id="Employees" name="Dipendenti"/>
   <tab id="Features" name="Caratteristiche"/>
+<<<<<<< HEAD
   <tab id="General_1" name="Generale"/>
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="General" name="Generale"/>
   <tab id="Geolocation" name="Geolocalizzazione"/>
   <tab id="Groups" name="Gruppi"/>
   <tab id="Dashboard" name="Pannello di controllo"/>
+<<<<<<< HEAD
   <tab id="Image_Settings" name="Image Settings"/>
   <tab id="Images" name="Immagini"/>
   <tab id="Information" name="Informazione"/>
   <tab id="Instant_Stock_Status" name="Stato dello Stock Istantaneo"/>
   <tab id="International" name="Internazionale"/>
+=======
+  <tab id="Images" name="Immagini"/>
+  <tab id="Instant_Stock_Status" name="Stato dello Stock Istantaneo"/>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="Invoices" name="Fatture"/>
   <tab id="Languages" name="Lingue"/>
   <tab id="Localization" name="Localizzazione"/>
   <tab id="Localization_1" name="Localizzazione"/>
+<<<<<<< HEAD
   <tab id="Locations" name="Locations"/>
   <tab id="Login" name="Accesso"/>
   <tab id="Logs" name="Log"/>
   <tab id="Look_feel" name="Design"/>
+=======
+  <tab id="Login" name="Accesso"/>
+  <tab id="Logs" name="Log"/>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="Maintenance" name="Manutenzione"/>
   <tab id="Manufacturers_and_suppliers" name="Marchi e Fornitori" />
   <tab id="Manufacturers" name="Marchi"/>
   <tab id="Marketing" name="Marketing"/>
   <tab id="Menus" name="Menù"/>
   <tab id="Merchandise_Returns" name="Resi"/>
+<<<<<<< HEAD
   <tab id="Modules_1" name="Modules" />
   <tab id="Modules" name="Modules" />
+=======
+  <tab id="Modules_1" name="Moduli e servizi"/>
+  <tab id="Modules" name="Moduli"/>
+  <tab id="Modules_Themes_Catalog" name="Catalogo moduli e temi"/>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="Monitoring" name="Monitoraggio"/>
   <tab id="Multistore" name="Multi-negozio"/>
   <tab id="Order_Messages" name="Messaggi predefiniti"/>
@@ -83,7 +114,11 @@
   <tab id="Positions" name="Posizioni"/>
   <tab id="Preferences_1" name="Preferenze"/>
   <tab id="Preferences" name="Preferenze"/>
+<<<<<<< HEAD
   <tab id="Price_Rules" name="Discounts"/>
+=======
+  <tab id="Price_Rules" name="Regole prezzi"/>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="Products_1" name="Prodotti"/>
   <tab id="Products" name="Prodotti"/>
   <tab id="Profiles" name="Profili"/>
@@ -95,7 +130,10 @@
   <tab id="SEO_URLs" name="URL e SEO"/>
   <tab id="Shipping" name="Spedizione"/>
   <tab id="Shipping_1" name="Preferenze"/>
+<<<<<<< HEAD
   <tab id="Shop_parameters" name="Parametri Negozio" />
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="Shop_URLs" name="URL negozi"/>
   <tab id="Shopping_Carts" name="Carrello"/>
   <tab id="Shops" name="Negozi associati"/>
@@ -112,7 +150,10 @@
   <tab id="Suppliers" name="Fornitori"/>
   <tab id="Supply_orders" name="Ordini fornitura"/>
   <tab id="Tags" name="Tag"/>
+<<<<<<< HEAD
   <tab id="Tax_Management" name="Tasse" />
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
   <tab id="Tax_Rules" name="Regole tasse"/>
   <tab id="Taxes" name="Tasse"/>
   <tab id="Themes_Catalog" name="Catalogo dei Temi" />
@@ -124,5 +165,8 @@
   <tab id="Webservice" name="Webservice"/>
   <tab id="Zones" name="Zone"/>
   <tab id="CarrierWizard" name="Corriere"/>
+<<<<<<< HEAD
   <tab id="Marketing_tools" name="Strumenti di Compra-Vendita" />
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 </entity_tab>

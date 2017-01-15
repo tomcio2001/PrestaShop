@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * 2007-2016 PrestaShop
  *
@@ -23,6 +24,32 @@
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
+=======
+/*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
 /**
  * @property Attachment $object
@@ -44,7 +71,11 @@ class AdminAttachmentsControllerCore extends AdminController
         $this->addRowAction('delete');
 
         $this->_select = 'IFNULL(virtual_product_attachment.products, 0) as products';
+<<<<<<< HEAD
         $this->_join = 'LEFT JOIN (SELECT id_attachment, COUNT(*) as products FROM '._DB_PREFIX_.'product_attachment GROUP BY id_attachment) virtual_product_attachment ON a.id_attachment = virtual_product_attachment.id_attachment';
+=======
+        $this->_join = 'LEFT JOIN (SELECT id_attachment, COUNT(*) as products FROM '._DB_PREFIX_.'product_attachment GROUP BY id_attachment) AS virtual_product_attachment ON a.id_attachment = virtual_product_attachment.id_attachment';
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
         $this->_use_found_rows = false;
 
         parent::__construct();
@@ -68,8 +99,13 @@ class AdminAttachmentsControllerCore extends AdminController
                 'callback' => 'displayHumanReadableSize'
             ),
             'products' => array(
+<<<<<<< HEAD
                 'title' => $this->trans('Associated with', array(), 'Admin.Catalog.Feature'),
                 'suffix' => $this->trans('product(s)', array(), 'Admin.Catalog.Feature'),
+=======
+                'title' => $this->l('Associated with'),
+                'suffix' => $this->l('product(s)'),
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                 'filter_key' => 'virtual_product_attachment!products',
             ),
         );

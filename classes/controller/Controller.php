@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * 2007-2016 PrestaShop
  *
@@ -23,6 +24,32 @@
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
+=======
+/*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
 /**
  * @TODO Move undeclared variables and methods to this (base) class: $errors, $layout, checkLiveEditAccess, etc.
@@ -395,6 +422,7 @@ abstract class ControllerCore
      */
     public function addJS($js_uri, $check_path = true)
     {
+<<<<<<< HEAD
         if (!is_array($js_uri)) {
             $js_uri = [$js_uri];
         }
@@ -406,6 +434,32 @@ abstract class ControllerCore
                 $version = $js_file[1];
             }
             $js_path = $js_file = $js_file[0];
+=======
+        if (is_array($js_uri)) {
+            foreach ($js_uri as $js_file) {
+                $js_file = explode('?', $js_file);
+                $version = '';
+                if (isset($js_file[1]) && $js_file[1]) {
+                    $version = $js_file[1];
+                }
+                $js_path = $js_file = $js_file[0];
+                if ($check_path) {
+                    $js_path = Media::getJSPath($js_file);
+                }
+
+                // $key = is_array($js_path) ? key($js_path) : $js_path;
+                if ($js_path && !in_array($js_path, $this->js_files)) {
+                    $this->js_files[] = $js_path.($version ? '?'.$version : '');
+                }
+            }
+        } else {
+            $js_uri = explode('?', $js_uri);
+            $version = '';
+            if (isset($js_uri[1]) && $js_uri[1]) {
+                $version = $js_uri[1];
+            }
+            $js_path = $js_uri = $js_uri[0];
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
             if ($check_path) {
                 $js_path = Media::getJSPath($js_file);
             }

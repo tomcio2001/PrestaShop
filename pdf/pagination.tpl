@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {**
  * 2007-2016 PrestaShop
  *
@@ -22,4 +23,6 @@
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 <p style="text-align: right; vertical-align: text-top;">{literal} {:png:} / {:ptg:} {/literal}</p>

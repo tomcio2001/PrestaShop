@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * 2007-2016 PrestaShop
  *
@@ -27,6 +28,33 @@
 /**
  * Class CategoryCore
  */
+=======
+/*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 class CategoryCore extends ObjectModel
 {
     public $id;
@@ -946,7 +974,11 @@ class CategoryCore extends ObjectModel
 					AND cp.`id_category` = '.(int) $this->id
                     .($active ? ' AND product_shop.`active` = 1' : '')
                     .($front ? ' AND product_shop.`visibility` IN ("both", "catalog")' : '')
+<<<<<<< HEAD
                     .($idSupplier ? ' AND p.id_supplier = '.(int)$idSupplier : '');
+=======
+                    .($id_supplier ? ' AND p.id_supplier = '.(int)$id_supplier : '');
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
         if ($random === true) {
             $sql .= ' ORDER BY RAND() LIMIT '.(int) $randomNumberProducts;
@@ -1678,10 +1710,16 @@ class CategoryCore extends ObjectModel
             SET c.`position` = '.(int) $position.',
             category_shop.`position` = '.(int) $position.',
             c.`date_upd` = "'.date('Y-m-d H:i:s').'"
+<<<<<<< HEAD
             WHERE c.`id_parent` = '.(int) $movedCategory['id_parent'].'
             AND c.`id_category`='.(int) $movedCategory['id_category']));
         Hook::exec('actionCategoryUpdate', array('category' => new Category($movedCategory['id_category'])));
 
+=======
+            WHERE c.`id_parent` = '.(int)$moved_category['id_parent'].'
+            AND c.`id_category`='.(int)$moved_category['id_category']));
+        Hook::exec('actionCategoryUpdate', array('category' => new Category($moved_category['id_category'])));
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
         return $result;
     }
 

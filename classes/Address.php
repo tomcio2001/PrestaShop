@@ -18,10 +18,17 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
+<<<<<<< HEAD
  * @author    PrestaShop SA <contact@prestashop.com>
  * @copyright 2007-2016 PrestaShop SA
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
+=======
+ *  @author 	PrestaShop SA <contact@prestashop.com>
+ *  @copyright  2007-2016 PrestaShop SA
+ *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *  International Registered Trademark & Property of PrestaShop SA
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
  */
 
 /**
@@ -417,8 +424,8 @@ class AddressCore extends ObjectModel
     public static function initialize($id_address = null, $with_geoloc = false)
     {
         $context = Context::getContext();
-
-        if ($id_address) {
+        $exists = (int)$id_address && (bool)Address::addressExists($id_address);
+        if ($exists) {
             $context_hash = (int)$id_address;
         } elseif ($with_geoloc && isset($context->customer->geoloc_id_country)) {
             $context_hash = md5((int)$context->customer->geoloc_id_country.'-'.(int)$context->customer->id_state.'-'.
@@ -432,7 +439,7 @@ class AddressCore extends ObjectModel
 
         if (!Cache::isStored($cache_id)) {
             // if an id_address has been specified retrieve the address
-            if ($id_address) {
+            if ($exists) {
                 $address = new Address((int)$id_address);
 
                 if (!Validate::isLoadedObject($address)) {
@@ -454,7 +461,6 @@ class AddressCore extends ObjectModel
 
             return $address;
         }
-
         return Cache::retrieve($cache_id);
     }
 

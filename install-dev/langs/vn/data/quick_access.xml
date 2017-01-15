@@ -5,6 +5,9 @@
   <quick_access id="New_category" name="New category"/>
   <quick_access id="New_product" name="New product"/>
   <quick_access id="New_voucher" name="New voucher"/>
+<<<<<<< HEAD
   <quick_access id="Orders" name="Orders"/>
   <quick_access id="Installed_modules" name="Installed modules"/>
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 </entity_quick_access>

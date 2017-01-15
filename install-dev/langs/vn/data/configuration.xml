@@ -21,7 +21,10 @@
 Regards,&#xD;
 Customer service</value>
   </configuration>
+<<<<<<< HEAD
   <configuration id="PS_MAINTENANCE_TEXT">
     <value>We are currently updating our shop and will be back really soon.&lt;br&gt;Thanks for your patience.</value>
   </configuration>
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 </entity_configuration>

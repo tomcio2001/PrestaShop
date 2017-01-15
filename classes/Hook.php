@@ -18,10 +18,17 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
+<<<<<<< HEAD
  * @author    PrestaShop SA <contact@prestashop.com>
  * @copyright 2007-2016 PrestaShop SA
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
+=======
+ *  @author		PrestaShop SA <contact@prestashop.com>
+ *  @copyright  2007-2016 PrestaShop SA
+ *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *  International Registered Trademark & Property of PrestaShop SA
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
  */
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
@@ -458,8 +465,13 @@ class HookCore extends ObjectModel
     public static function getHookModuleExecList($hook_name = null)
     {
         $context = Context::getContext();
+<<<<<<< HEAD
         $cache_id = self::MODULE_LIST_BY_HOOK_KEY.(isset($context->shop->id) ? '_'.$context->shop->id : '').((isset($context->customer)) ? '_'.$context->customer->id : '');
         if (!Cache::isStored($cache_id) || $hook_name == 'displayPayment' || $hook_name == 'displayPaymentEU' || $hook_name == 'paymentOptions' || $hook_name == 'displayBackOfficeHeader') {
+=======
+        $cache_id = 'hook_module_exec_list_'.(isset($context->shop->id) ? '_'.$context->shop->id : '').((isset($context->customer)) ? '_'.$context->customer->id : '');
+        if (!Cache::isStored($cache_id) || $hook_name == 'displayPayment' || $hook_name == 'displayPaymentEU' || $hook_name == 'displayBackOfficeHeader') {
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
             $frontend = true;
             $groups = array();
             $use_groups = Group::isFeatureActive();
@@ -488,12 +500,18 @@ class HookCore extends ObjectModel
             }
             $sql->innerJoin('hook_module', 'hm', 'hm.`id_module` = m.`id_module`');
             $sql->innerJoin('hook', 'h', 'hm.`id_hook` = h.`id_hook`');
+<<<<<<< HEAD
             if ($hook_name != 'paymentOptions') {
                 $sql->where('h.`name` != "paymentOptions"');
+=======
+            if ($hook_name != 'displayPayment' && $hook_name != 'displayPaymentEU') {
+                $sql->where('h.`name` != "displayPayment" AND h.`name` != "displayPaymentEU"');
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
             }
             // For payment modules, we check that they are available in the contextual country
             elseif ($frontend) {
                 if (Validate::isLoadedObject($context->country)) {
+<<<<<<< HEAD
                     $sql->where('((h.`name` = "displayPayment" OR h.`name` = "displayPaymentEU" OR h.`name` = "paymentOptions")AND (SELECT `id_country` FROM `'._DB_PREFIX_.'module_country` mc WHERE mc.`id_module` = m.`id_module` AND `id_country` = '.(int)$context->country->id.' AND `id_shop` = '.(int)$context->shop->id.' LIMIT 1) = '.(int)$context->country->id.')');
                 }
                 if (Validate::isLoadedObject($context->currency)) {
@@ -504,6 +522,12 @@ class HookCore extends ObjectModel
                     if (Validate::isLoadedObject($carrier)) {
                         $sql->where('((h.`name` = "displayPayment" OR h.`name` = "displayPaymentEU" OR h.`name` = "paymentOptions") AND (SELECT `id_reference` FROM `'._DB_PREFIX_.'module_carrier` mcar WHERE mcar.`id_module` = m.`id_module` AND `id_reference` = '.(int)$carrier->id_reference.' AND `id_shop` = '.(int)$context->shop->id.' LIMIT 1) = '.(int)$carrier->id_reference.')');
                     }
+=======
+                    $sql->where('((h.`name` = "displayPayment" OR h.`name` = "displayPaymentEU") AND (SELECT `id_country` FROM `'._DB_PREFIX_.'module_country` mc WHERE mc.`id_module` = m.`id_module` AND `id_country` = '.(int)$context->country->id.' AND `id_shop` = '.(int)$context->shop->id.' LIMIT 1) = '.(int)$context->country->id.')');
+                }
+                if (Validate::isLoadedObject($context->currency)) {
+                    $sql->where('((h.`name` = "displayPayment" OR h.`name` = "displayPaymentEU") AND (SELECT `id_currency` FROM `'._DB_PREFIX_.'module_currency` mcr WHERE mcr.`id_module` = m.`id_module` AND `id_currency` IN ('.(int)$context->currency->id.', -1, -2) LIMIT 1) IN ('.(int)$context->currency->id.', -1, -2))');
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                 }
             }
             if (Validate::isLoadedObject($context->shop)) {
@@ -514,7 +538,7 @@ class HookCore extends ObjectModel
                 if ($use_groups) {
                     $sql->leftJoin('module_group', 'mg', 'mg.`id_module` = m.`id_module`');
                     if (Validate::isLoadedObject($context->shop)) {
-                        $sql->where('mg.id_shop = '.((int)$context->shop->id).(count($groups) ? ' AND  mg.`id_group` IN ('.implode(', ', $groups).')' : ''));
+                        $sql->where('mg.`id_shop` = '.((int)$context->shop->id).(count($groups) ? ' AND  mg.`id_group` IN ('.implode(', ', $groups).')' : ''));
                     } elseif (count($groups)) {
                         $sql->where('mg.`id_group` IN ('.implode(', ', $groups).')');
                     }
@@ -539,7 +563,11 @@ class HookCore extends ObjectModel
                     );
                 }
             }
+<<<<<<< HEAD
             if ($hook_name != 'displayPayment' && $hook_name != 'displayPaymentEU' && $hook_name != 'paymentOptions' && $hook_name != 'displayBackOfficeHeader') {
+=======
+            if ($hook_name != 'displayPayment' && $hook_name != 'displayPaymentEU' && $hook_name != 'displayBackOfficeHeader') {
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                 Cache::store($cache_id, $list);
                 // @todo remove this in 1.6, we keep it in 1.5 for backward compatibility
                 self::$_hook_modules_cache_exec = $list;
@@ -793,6 +821,132 @@ class HookCore extends ObjectModel
                 unset($output['cart']);
             }
         }
+<<<<<<< HEAD
+=======
+        return false;
+    }
+
+    /**
+     * @deprecated 1.5.0
+     */
+    public static function PDFInvoice($pdf, $id_order)
+    {
+        Tools::displayAsDeprecated();
+        if (!is_object($pdf) || !Validate::isUnsignedId($id_order)) {
+            return false;
+        }
+        return Hook::exec('PDFInvoice', array('pdf' => $pdf, 'id_order' => $id_order));
+    }
+
+    /**
+     * @deprecated 1.5.0
+     */
+    public static function backBeforePayment($module)
+    {
+        Tools::displayAsDeprecated();
+        if ($module) {
+            return Hook::exec('backBeforePayment', array('module' => strval($module)));
+        }
+    }
+
+    /**
+     * @deprecated 1.5.0
+     */
+    public static function updateCarrier($id_carrier, $carrier)
+    {
+        Tools::displayAsDeprecated();
+        if (!Validate::isUnsignedId($id_carrier) || !is_object($carrier)) {
+            return false;
+        }
+        return Hook::exec('updateCarrier', array('id_carrier' => $id_carrier, 'carrier' => $carrier));
+    }
+
+    /**
+     * Preload hook modules cache
+     *
+     * @deprecated 1.5.0 use Hook::getHookModuleList() instead
+     *
+     * @return bool preload_needed
+     */
+    public static function preloadHookModulesCache()
+    {
+        Tools::displayAsDeprecated('Use Hook::getHookModuleList() instead');
+
+        if (!is_null(self::$_hook_modules_cache)) {
+            return false;
+        }
+
+        self::$_hook_modules_cache = Hook::getHookModuleList();
+        return true;
+    }
+
+    /**
+     * Return hook ID from name
+     *
+     * @param string $hook_name Hook name
+     * @return int Hook ID
+     *
+     * @deprecated since 1.5.0 use Hook::getIdByName() instead
+     */
+    public static function get($hook_name)
+    {
+        Tools::displayAsDeprecated('Use Hook::getIdByName() instead');
+        if (!Validate::isHookName($hook_name)) {
+            die(Tools::displayError());
+        }
+
+        $result = Db::getInstance()->getRow('
+		SELECT `id_hook`, `name`
+		FROM `'._DB_PREFIX_.'hook`
+		WHERE `name` = \''.pSQL($hook_name).'\'');
+
+        return ($result ? $result['id_hook'] : false);
+    }
+
+    /**
+     * Called when quantity of a product is updated.
+     *
+     * @deprecated 1.5.3.0
+     *
+     * @param Cart $cart
+     * @param Order $order
+     * @param Customer $customer
+     * @param Currency $currency
+     * @param $orderStatus
+     *
+     * @throws PrestaShopException
+     *
+     * @return string
+     */
+    public static function newOrder($cart, $order, $customer, $currency, $order_status)
+    {
+        Tools::displayAsDeprecated();
+        return Hook::exec('newOrder', array(
+            'cart' => $cart,
+            'order' => $order,
+            'customer' => $customer,
+            'currency' => $currency,
+            'orderStatus' => $order_status));
+    }
+
+    /**
+     * @deprecated 1.5.0
+     */
+    public static function updateQuantity($product, $order = null)
+    {
+        Tools::displayAsDeprecated();
+        return Hook::exec('updateQuantity', array('product' => $product, 'order' => $order));
+    }
+
+    /**
+     * @deprecated 1.5.0
+     */
+    public static function productFooter($product, $category)
+    {
+        Tools::displayAsDeprecated();
+        return Hook::exec('productFooter', array('product' => $product, 'category' => $category));
+    }
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
         return $output;
     }

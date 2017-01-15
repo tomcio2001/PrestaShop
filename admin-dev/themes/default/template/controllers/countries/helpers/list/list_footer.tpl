@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {**
  * 2007-2016 PrestaShop
  *
@@ -49,6 +50,63 @@
 								<a href="#" onclick="{if isset($params.confirm)}if (confirm('{$params.confirm}')){/if}sendBulkAction($(this).closest('form').get(0), 'submitBulk{$key}{$table}');">
 									{if isset($params.icon)}<i class="{$params.icon}"></i>{/if}&nbsp;{$params.text}
 								</a>
+=======
+{*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*}
+			</table>
+			<div class="row">
+				<div class="col-lg-8">
+				{if $bulk_actions}
+					{if $bulk_actions|count > 1}
+						<div class="form-group bulk-actions">
+							<div class="col-lg-6">
+								<select id="select_submitBulk" name="select_submitBulk">
+									{foreach $bulk_actions as $key => $params}
+										{if $params.text == 'divider'}
+											<option value="" disabled="disabled" class="{$params.text|escape:'html':'UTF-8'}">--</option>
+										{else}
+											<option value="{$key}"{if isset($params.confirm)} data-confirm="{$params.confirm}"{/if}>{$params.text|escape:'html':'UTF-8'}</option>
+										{/if}
+									{/foreach}
+								</select>
+							</div>
+							<div class="col-lg-6">
+								<input type="submit" class="btn btn-default" name="submitBulk" id="submitBulk" value="{l s='Apply'}" />
+							</div>
+						</div>
+					{else}
+						{foreach $bulk_actions as $key => $params}
+						<div class="form-group bulk-actions">
+							<div class="col-lg-6">
+							{if $key == 'affectzone'}
+								<select id="zone_to_affect" name="zone_to_affect">
+									{foreach $zones as $z}
+										<option value="{$z['id_zone']}">{$z['name']}</option>
+									{/foreach}
+								</select>
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 							{/if}
 						</li>
 					{/foreach}

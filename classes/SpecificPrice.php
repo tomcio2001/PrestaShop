@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * 2007-2016 PrestaShop
  *
@@ -23,6 +24,32 @@
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
+=======
+/*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
 class SpecificPriceCore extends ObjectModel
 {
@@ -92,13 +119,26 @@ class SpecificPriceCore extends ObjectModel
     protected static $_filterOutCache = array();
     protected static $_cache_priorities = array();
     protected static $_no_specific_values = array();
+<<<<<<< HEAD
+=======
+
+    /**
+     * Flush local cache
+     */
+    protected function flushCache() {
+        SpecificPrice::$_specificPriceCache = array();
+        SpecificPrice::$_filterOutCache = array();
+        SpecificPrice::$_cache_priorities = array();
+        SpecificPrice::$_no_specific_values = array();
+        Product::flushPriceCache();
+    }
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
     public function add($autodate = true, $nullValues = false)
     {
         if (parent::add($autodate, $nullValues)) {
             // Flush cache when we adding a new specific price
-            SpecificPrice::$_specificPriceCache = array();
-            Product::flushPriceCache();
+            $this->flushCache();
             // Set cache of feature detachable to true
             Configuration::updateGlobalValue('PS_SPECIFIC_PRICE_FEATURE_ACTIVE', '1');
             return true;
@@ -110,8 +150,7 @@ class SpecificPriceCore extends ObjectModel
     {
         if (parent::update($null_values)) {
             // Flush cache when we updating a new specific price
-            SpecificPrice::$_specificPriceCache = array();
-            Product::flushPriceCache();
+            $this->flushCache();
             return true;
         }
         return false;
@@ -121,8 +160,7 @@ class SpecificPriceCore extends ObjectModel
     {
         if (parent::delete()) {
             // Flush cache when we deletind a new specific price
-            SpecificPrice::$_specificPriceCache = array();
-            Product::flushPriceCache();
+            $this->flushCache();
             // Refresh cache of feature detachable
             Configuration::updateGlobalValue('PS_SPECIFIC_PRICE_FEATURE_ACTIVE', SpecificPrice::isCurrentlyUsed($this->def['table']));
             return true;
@@ -211,15 +249,23 @@ class SpecificPriceCore extends ObjectModel
      */
     protected static function filterOutField($field_name, $field_value, $threshold = 1000)
     {
+<<<<<<< HEAD
         $name = Db::getInstance()->escape($field_name, false, true);
         $query_extra = 'AND `'.$name.'` = 0 ';
+=======
+        $query_extra = 'AND `'.$field_name.'` = 0 ';
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
         if ($field_value == 0 || array_key_exists($field_name, self::$_no_specific_values)) {
             return $query_extra;
         }
         $key_cache     = __FUNCTION__.'-'.$field_name.'-'.$threshold;
         $specific_list = array();
         if (!array_key_exists($key_cache, SpecificPrice::$_filterOutCache)) {
+<<<<<<< HEAD
             $query_count    = 'SELECT COUNT(DISTINCT `'.$name.'`) FROM `'._DB_PREFIX_.'specific_price` WHERE `'.$field_name.'` != 0';
+=======
+            $query_count    = 'SELECT COUNT(DISTINCT `'.$field_name.'`) FROM `'._DB_PREFIX_.'specific_price` WHERE `'.$field_name.'` != 0';
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
             $specific_count = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($query_count);
             if ($specific_count == 0) {
                 self::$_no_specific_values[$field_name] = true;
@@ -227,7 +273,11 @@ class SpecificPriceCore extends ObjectModel
                 return $query_extra;
             }
             if ($specific_count < $threshold) {
+<<<<<<< HEAD
                 $query             = 'SELECT DISTINCT `'.$name.'` FROM `'._DB_PREFIX_.'specific_price` WHERE `'.$name.'` != 0';
+=======
+                $query             = 'SELECT DISTINCT `'.$field_name.'` FROM `'._DB_PREFIX_.'specific_price` WHERE `'.$field_name.'` != 0';
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                 $tmp_specific_list = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($query);
                 foreach ($tmp_specific_list as $key => $value) {
                     $specific_list[] = $value[$field_name];
@@ -238,8 +288,14 @@ class SpecificPriceCore extends ObjectModel
             $specific_list = SpecificPrice::$_filterOutCache[$key_cache];
         }
 
+<<<<<<< HEAD
         if (in_array($field_value, $specific_list)) {
             $query_extra = 'AND `'.$name.'` '.self::formatIntInQuery(0, $field_value).' ';
+=======
+        // $specific_list is empty if the threshold is reached
+        if (empty($specific_list) || in_array($field_value, $specific_list)) {
+            $query_extra = 'AND `'.$field_name.'` '.self::formatIntInQuery(0, $field_value).' ';
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
         }
 
         return $query_extra;
@@ -307,9 +363,12 @@ class SpecificPriceCore extends ObjectModel
         if (!$from_specific_count && !$to_specific_count) {
             $ending = $beginning = $first_date;
         }
+<<<<<<< HEAD
         $db = Db::getInstance();
         $beginning = $db->escape($beginning);
         $ending = $db->escape($ending);
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
         $query_extra .= ' AND (`from` = \'0000-00-00 00:00:00\' OR \''.$beginning.'\' >= `from`)'
                        .' AND (`to` = \'0000-00-00 00:00:00\' OR \''.$ending.'\' <= `to`)';
@@ -317,8 +376,12 @@ class SpecificPriceCore extends ObjectModel
         return $query_extra;
     }
 
+<<<<<<< HEAD
     protected static function formatIntInQuery($first_value, $second_value)
     {
+=======
+    private static function formatIntInQuery($first_value, $second_value) {
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
         $first_value = (int)$first_value;
         $second_value = (int)$second_value;
         if ($first_value != $second_value) {
@@ -478,7 +541,11 @@ class SpecificPriceCore extends ObjectModel
 					`reduction` > 0
 		'.$query_extra);
         $ids_product = array();
+<<<<<<< HEAD
         foreach ($results as $key => $value) {
+=======
+        foreach($results as $key => $value) {
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
             $ids_product[] = $with_combination_id ? array('id_product' => (int)$value['id_product'], 'id_product_attribute' => (int)$value['id_product_attribute']) : (int)$value['id_product'];
         }
 

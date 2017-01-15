@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * 2007-2016 PrestaShop
  *
@@ -23,6 +24,32 @@
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
+=======
+/*
+* 2007-2016 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2016 PrestaShop SA
+*  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
 /**
  * @property Tab $object
@@ -186,23 +213,16 @@ class AdminTabsControllerCore extends AdminController
             )
         );
 
-        $display_parent = true;
-        if (Validate::isLoadedObject($this->object) && !class_exists($this->object->class_name.'Controller')) {
-            $display_parent = false;
-        }
-
-        if ($display_parent) {
-            $this->fields_form['input'][] = array(
-                'type' => 'select',
-                'label' => $this->l('Parent'),
-                'name' => 'id_parent',
-                'options' => array(
-                    'query' => $tabs,
-                    'id' => 'id_tab',
-                    'name' => 'name'
-                )
-            );
-        }
+        $this->fields_form['input'][] = array(
+            'type' => 'select',
+            'label' => $this->l('Parent'),
+            'name' => 'id_parent',
+            'options' => array(
+                'query' => $tabs,
+                'id' => 'id_tab',
+                'name' => 'name'
+            )
+        );
 
         return parent::renderForm();
     }
@@ -305,24 +325,40 @@ class AdminTabsControllerCore extends AdminController
                 )
             ), $this->bulk_actions);
             foreach ($submit_bulk_actions as $bulk_action => $params) {
+<<<<<<< HEAD
                 if (Tools::isSubmit('submitBulk'.$bulk_action.$this->table) || Tools::isSubmit('submitBulk'.$bulk_action)) {
                     if ($this->access('edit')) {
                         $this->action = 'bulk'.$bulk_action;
                         $this->boxes = Tools::getValue($this->list_id.'Box');
+=======
+                if (Tools::isSubmit('submitBulk' . $bulk_action . $this->table) || Tools::isSubmit('submitBulk' . $bulk_action)) {
+                    if ($this->tabAccess['edit'] === '1') {
+                        $this->action = 'bulk' . $bulk_action;
+                        $this->boxes = Tools::getValue($this->list_id . 'Box');
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                     } else {
                         $this->errors[] = $this->trans('You do not have permission to edit this.', array(), 'Admin.Notifications.Error');
                     }
                     break;
                 } elseif (Tools::isSubmit('submitBulk')) {
+<<<<<<< HEAD
                     if ($this->access('edit')) {
                         $this->action = 'bulk'.Tools::getValue('select_submitBulk');
                         $this->boxes = Tools::getValue($this->list_id.'Box');
+=======
+                    if ($this->tabAccess['edit'] === '1') {
+                        $this->action = 'bulk' . Tools::getValue('select_submitBulk');
+                        $this->boxes = Tools::getValue($this->list_id . 'Box');
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
                     } else {
                         $this->errors[] = $this->trans('You do not have permission to edit this.', array(), 'Admin.Notifications.Error');
                     }
                     break;
                 }
             }
+        } elseif (Tools::isSubmit('submitAdd'.$this->table) && ($class_name = Tools::getValue('class_name')) && !class_exists($class_name.'Controller')) {
+            $this->errors[] = sprintf(Tools::displayError('The class name \'%sController\' cannot be found.'), $class_name);
+            return parent::postProcess();
         } else {
             // Temporary add the position depend of the selection of the parent category
             if (!Tools::isSubmit('id_tab')) { // @todo Review

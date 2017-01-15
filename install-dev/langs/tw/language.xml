@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
 	<name><![CDATA[繁體中文 (Traditional Chinese)]]></name>
+<<<<<<< HEAD
 	<locale>zh-TW</locale>
+=======
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 	<language_code>tw-tw</language_code>
 	<date_format_lite>Y-m-d</date_format_lite>
 	<date_format_full>Y-m-d H:i:s</date_format_full>

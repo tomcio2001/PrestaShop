@@ -16,6 +16,7 @@ Do not edit or add to this file if you wish to upgrade PrestaShop to newer
 versions in the future. If you wish to customize PrestaShop for your
 needs please refer to http://www.prestashop.com for more information.
 
+<<<<<<< HEAD
 @author    PrestaShop SA <contact@prestashop.com>
 @copyright 2007-2016 PrestaShop SA
 @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
@@ -23,6 +24,15 @@ International Registered Trademark & Property of PrestaShop SA
 
 NAME: Prestashop 1.7.0.4
 VERSION: 1.7.0.4
+=======
+@author PrestaShop SA <contact@prestashop.com>
+@copyright 2007-2016 PrestaShop SA
+@license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+International Registered Trademark & Property of PrestaShop SA
+
+NAME: Prestashop 1.6.1.6
+VERSION: 1.6.1.6
+>>>>>>> 81aa7fda2ffd8c747b99262ecae76fd22efddb3f
 
 PREPARACIÓN
 ===========
